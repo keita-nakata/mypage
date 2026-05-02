@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Typography, Box } from '@mui/material';
 import WorkItem from './WorkItem';
 import WorkItemDialog from './WorkItemDialog';
-import { works, Work } from '@/app/data/worksData';
+import { works, Work } from '@/data/en/works';
 
 const Works: React.FC = () => {
     const [openDialog, setOpenDialog] = useState(false);
@@ -15,7 +15,7 @@ const Works: React.FC = () => {
 
     const handleCloseDialog = () => {
         setOpenDialog(false);
-        setSelectedWork(null); // ダイアログが閉じられたときにリセット
+        setSelectedWork(null);
     };
 
     return (

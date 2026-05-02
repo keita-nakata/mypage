@@ -51,7 +51,7 @@ const WorkItemDialog: React.FC<WorkItemDialogProps> = ({ open, onClose, imageSrc
                             ))}
                         </Box>
                         <Typography variant='h5' sx={{ fontFamily: 'Fredoka', fontWeight: 600, marginTop: '30px' }}>
-                            使用言語・ツール
+                            Technologies
                         </Typography>
                         <Typography variant='body1'>
                             {technologies}

@@ -1,7 +1,7 @@
 import React from "react";
 import { Typography, Box } from "@mui/material";
 import HobbyItem from "./HobbyItem";
-import { hobbies } from "@/app/data/hobbyData";
+import { hobbies } from "@/data/en/hobbies";
 
 const HobbyList: React.FC = () => {
   return (
@@ -13,7 +13,7 @@ const HobbyList: React.FC = () => {
           title={hobby.title}
           description={hobby.description}
           reverse={index % 2 !== 0}
-          scale={hobby.scale}  // 個別に倍率を指定
+          scale={hobby.scale}
         />
       ))}
     </Box>
@@ -28,14 +28,10 @@ const Hobby: React.FC = () => {
     }}>
       <Typography variant="h4" sx={{ fontFamily: 'Fredoka', fontWeight: 500, marginBottom: '50px' }}>HOBBY</Typography>
       <Box>
-        <Box>
-          <HobbyList />
-        </Box>
+        <HobbyList />
       </Box>
     </Box>
   );
 };
-
-
 
 export default Hobby;
