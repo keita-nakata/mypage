@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Link, Element } from 'react-scroll';
+import NextLink from 'next/link';
 import Hero from '@/app/components/Hero';
 import Profile from '@/app/components/Profile';
 import Works from '@/app/components/Works';
@@ -28,6 +29,9 @@ const App: React.FC = () => {
           <Link to="contact" spy={true} smooth={true} offset={-70} duration={500}>
             <Button color="inherit">CONTACT</Button>
           </Link>
+          <NextLink href="/blog" style={{ textDecoration: 'none' }}>
+            <Button color="inherit">BLOG</Button>
+          </NextLink>
         </Toolbar>
       </AppBar>
 
