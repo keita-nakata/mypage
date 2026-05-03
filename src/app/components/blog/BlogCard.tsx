@@ -1,18 +1,20 @@
-import Link from 'next/link';
-import { Box, Typography } from '@mui/material';
-import BlogTag from './BlogTag';
-import type { BlogPost } from '@/types/blog';
+import Link from 'next/link'
+import { Box, Typography } from '@mui/material'
+import BlogTag from './BlogTag'
+import type { BlogPost } from '@/types/blog'
 
 interface BlogCardProps {
-  post: BlogPost;
+  post: BlogPost
 }
 
 export default function BlogCard({ post }: BlogCardProps) {
-  const formattedDate = new Date(post.publishedAt).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
+  const formattedDate = post.published_at
+    ? new Date(post.published_at).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
+    : null
 
   return (
     <Link href={`/blog/${post.slug}`} style={{ textDecoration: 'none' }}>
@@ -31,22 +33,29 @@ export default function BlogCard({ post }: BlogCardProps) {
       >
         <Typography
           variant="h6"
-          sx={{ fontFamily: 'Fredoka', fontWeight: 600, marginBottom: 0.5, color: 'text.primary' }}
+          sx={{
+            fontFamily: 'Fredoka',
+            fontWeight: 600,
+            marginBottom: 0.5,
+            color: 'text.primary',
+          }}
         >
           {post.title}
         </Typography>
-        <Typography variant="body2" sx={{ color: 'text.secondary', marginBottom: 1.5 }}>
-          {post.description}
-        </Typography>
-        <Typography variant="caption" sx={{ color: 'text.secondary', display: 'block', marginBottom: 1 }}>
+        <Typography
+          variant="caption"
+          sx={{ color: 'text.secondary', display: 'block', marginBottom: 1 }}
+        >
           {formattedDate}
         </Typography>
-        <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap' }}>
-          {post.tags.map((tag) => (
-            <BlogTag key={tag} tag={tag} />
-          ))}
-        </Box>
+        {post.tags && post.tags.length > 0 && (
+          <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap' }}>
+            {post.tags.map((tag) => (
+              <BlogTag key={tag} tag={tag} />
+            ))}
+          </Box>
+        )}
       </Box>
     </Link>
-  );
+  )
 }

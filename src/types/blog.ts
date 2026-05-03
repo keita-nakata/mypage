@@ -1,14 +1,18 @@
 export type BlogSection = {
-  heading: string;
-  body: string[];
-};
+  heading: string
+  body: string[]
+}
 
 export type BlogPost = {
-  slug: string;
-  title: string;
-  description: string;
-  publishedAt: string;
-  tags: string[];
-  relatedProject?: string;
-  content: BlogSection[];
-};
+  id: string
+  slug: string
+  title: string
+  content: string
+  thumbnail_url: string | null
+  status: 'draft' | 'published'
+  locale: string
+  published_at: string | null
+  created_at: string
+  updated_at: string
+  tags?: string[]
+}
