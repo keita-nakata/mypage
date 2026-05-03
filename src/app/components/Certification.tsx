@@ -3,25 +3,21 @@ import { Typography, Box } from "@mui/material";
 import { certifications } from "@/data/en/certifications";
 
 const Certification: React.FC = () => {
-    return (
-        <Box sx={{
-            margin: "50px 100px 50px 100px",
-            padding: 0,
-        }}>
-            <Typography variant="h4" sx={{ fontFamily: 'Fredoka', fontWeight: 500, marginBottom: '30px' }}>
-                CERTIFICATIONS
-            </Typography>
-            <Box sx={{ marginLeft: '30px' }}>
-                {certifications.map((cert, index) => (
-                    <Box key={index} sx={{ marginBottom: '10px' }}>
-                        <Typography variant="h6" sx={{ fontFamily: 'Fredoka', fontWeight: 500 }}>
-                            {cert}
-                        </Typography>
-                    </Box>
-                ))}
-            </Box>
-        </Box>
-    );
+  return (
+    <Box sx={{
+      mx: { xs: 2, sm: 4, md: '50px', lg: '100px' },
+      my: { xs: 3, md: '50px' },
+    }}>
+      <Typography variant="h4" sx={{ mb: '30px' }}>CERTIFICATIONS</Typography>
+      <Box sx={{ ml: { xs: 1, md: '30px' } }}>
+        {certifications.map((cert, index) => (
+          <Box key={index} sx={{ mb: '10px' }}>
+            <Typography variant="h6">{cert}</Typography>
+          </Box>
+        ))}
+      </Box>
+    </Box>
+  );
 };
 
 export default Certification;

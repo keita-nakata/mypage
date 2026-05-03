@@ -8,16 +8,18 @@ import LineComponent from './LineComponent';
 
 const Profile: React.FC = () => {
   return (
-    <Box sx={{ 
-      marginTop: "30px",
-      marginBottom: "50px",
-      paddingBottom: "100px",
-      minHeight: '100vh', 
-      display: 'flex', 
-      flexDirection: 'column', 
+    <Box sx={{
+      mt: { xs: 2, md: '30px' },
+      mb: { xs: 3, md: '50px' },
+      pb: { xs: 6, md: '100px' },
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
       backgroundColor: '#ffffff',
     }}>
-      <Typography variant="h3" sx={{ fontFamily: 'Fredoka', fontWeight: 500, letterSpacing: "0.1em", marginTop: '50px', textAlign: 'center' }}>ABOUT ME</Typography>
+      <Typography variant="h4" sx={{ letterSpacing: '0.1em', mt: { xs: 4, md: '50px' }, textAlign: 'center' }}>
+        ABOUT ME
+      </Typography>
       <BasicInfo />
       <LineComponent />
       <SkillSet />

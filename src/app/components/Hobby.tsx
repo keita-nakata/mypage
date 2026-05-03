@@ -23,13 +23,11 @@ const HobbyList: React.FC = () => {
 const Hobby: React.FC = () => {
   return (
     <Box sx={{
-      margin: "50px 100px 50px 100px",
-      padding: 0,
+      mx: { xs: 2, sm: 4, md: '50px', lg: '100px' },
+      my: { xs: 3, md: '50px' },
     }}>
-      <Typography variant="h4" sx={{ fontFamily: 'Fredoka', fontWeight: 500, marginBottom: '50px' }}>HOBBY</Typography>
-      <Box>
-        <HobbyList />
-      </Box>
+      <Typography variant="h4" sx={{ mb: { xs: 3, md: '50px' } }}>HOBBY</Typography>
+      <HobbyList />
     </Box>
   );
 };

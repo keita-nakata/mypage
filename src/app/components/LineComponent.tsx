@@ -1,13 +1,8 @@
 import React from "react";
-import { Box } from "@mui/material";
+import Divider from "@mui/material/Divider";
 
-const LineComponent: React.FC = () => {
-  return (
-    <Box sx={{ 
-        borderBottom: '2px solid #ccc', // 線の色と太さ
-        mx: 10, // 左右の余白
-      }} />
-  );
-};
+const LineComponent: React.FC = () => (
+  <Divider sx={{ mx: { xs: 3, sm: 5, md: 10 }, opacity: 0.5 }} />
+);
 
 export default LineComponent;

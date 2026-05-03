@@ -3,19 +3,28 @@ import { Typography, Box } from '@mui/material';
 
 const Hero: React.FC = () => {
   return (
-    <Box sx={{ 
-      margin: 0, 
-      padding: 0, 
-      minHeight: '60vh', 
-      display: 'flex', 
-      flexDirection: 'column', 
-      justifyContent: 'flex-start',
-      marginTop: '40vh', 
-      alignItems: 'center', 
-      backgroundColor: '#f0f0f0',
+    <Box sx={{
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      background: 'linear-gradient(160deg, #f0f0f0 60%, #e0fafa 100%)',
+      px: { xs: 2, md: 4 },
+      textAlign: 'center',
     }}>
-      <Typography variant="h4" sx={{ fontFamily: 'Fredoka', fontWeight: 500, letterSpacing: "0.1em" }}>KEITA NAKATA</Typography>
-      <Typography variant="subtitle1" sx={{ fontFamily: 'Fredoka', letterSpacing: "0.1em" }}>SOFTWARE ENGINEER</Typography>
+      <Typography
+        variant="h2"
+        sx={{ letterSpacing: '0.15em', fontSize: { xs: '2.2rem', md: '3.5rem' } }}
+      >
+        KEITA NAKATA
+      </Typography>
+      <Typography
+        variant="h5"
+        sx={{ letterSpacing: '0.2em', mt: 1, color: 'text.secondary', fontSize: { xs: '1rem', md: '1.25rem' } }}
+      >
+        SOFTWARE ENGINEER
+      </Typography>
     </Box>
   );
 };

@@ -9,31 +9,31 @@ interface BarChartProps {
   backgroundColor?: string;
 }
 
-const SkillBar: React.FC<BarChartProps> = ({ data, title, backgroundColor='rgba(255, 255, 0, 0.4)' }) => {
-    const fixedBarHeight = 30;
-    const totalHeight = fixedBarHeight * data.length + 100;
+const SkillBar: React.FC<BarChartProps> = ({ data, title, backgroundColor = 'rgba(255, 255, 0, 0.4)' }) => {
+  const fixedBarHeight = 30;
+  const totalHeight = fixedBarHeight * data.length + 100;
 
-    return (
-        <Box sx={{
-            margin: '20px',
-            backgroundColor: backgroundColor,
-            borderRadius: '30px',
-        }}>
-          <Typography variant="h6" sx={{ fontFamily: 'Fredoka', fontWeight: 500, marginLeft: '30px', paddingTop: '10px'}}>{title}</Typography>
-          <ResponsiveContainer width="90%" height={totalHeight}>
-            <BarChart data={data} layout="vertical">
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis
-                type="number"
-                ticks={[0, 1, 2, 3]}
-                tickFormatter={(value) => proficiencyLabels[value]}
-              />
-              <YAxis dataKey="name" type="category" width={150} interval={0} />
-              <Bar dataKey="value" fill="#8884d8" maxBarSize={fixedBarHeight}/>
-            </BarChart>
-          </ResponsiveContainer>
-        </Box>
-      );
+  return (
+    <Box sx={{
+      margin: '20px',
+      backgroundColor: backgroundColor,
+      borderRadius: '30px',
+    }}>
+      <Typography variant="h6" sx={{ marginLeft: '30px', paddingTop: '10px' }}>{title}</Typography>
+      <ResponsiveContainer width="90%" height={totalHeight}>
+        <BarChart data={data} layout="vertical">
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis
+            type="number"
+            ticks={[0, 1, 2, 3]}
+            tickFormatter={(value) => proficiencyLabels[value]}
+          />
+          <YAxis dataKey="name" type="category" width={120} interval={0} />
+          <Bar dataKey="value" fill="#8884d8" maxBarSize={fixedBarHeight} />
+        </BarChart>
+      </ResponsiveContainer>
+    </Box>
+  );
 };
 
 export default SkillBar;

@@ -1,7 +1,5 @@
-// src/themes/theme.ts
 import { createTheme } from '@mui/material/styles';
 
-// カスタムテーマの作成
 const theme = createTheme({
   palette: {
     primary: {
@@ -13,6 +11,17 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: 'Roboto, sans-serif',
+    h1: { fontFamily: 'Fredoka, sans-serif', fontWeight: 500 },
+    h2: { fontFamily: 'Fredoka, sans-serif', fontWeight: 500 },
+    h3: { fontFamily: 'Fredoka, sans-serif', fontWeight: 500 },
+    h4: { fontFamily: 'Fredoka, sans-serif', fontWeight: 500 },
+    h5: { fontFamily: 'Fredoka, sans-serif', fontWeight: 500 },
+    h6: { fontFamily: 'Fredoka, sans-serif', fontWeight: 500 },
+  },
+  components: {
+    MuiDialog: {
+      defaultProps: { scroll: 'paper' },
+    },
   },
 });
 
