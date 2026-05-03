@@ -1,8 +1,8 @@
 export const basicInfo = {
   name: "Keita Nakata",
   origin: "From Mie, Japan",
-  belonging: "B.Eng. Mie University → M.Eng. student (2nd year), UEC Tokyo — Dept. of Informatics | Hashiyama Lab",
+  belonging: "Frontend Engineer at Rakuten Group, Inc. (since April 2026)",
   research:
-    "My undergraduate thesis focused on estimating the age of zebrafish from swimming videos using deep learning. " +
-    "Currently, I am researching ways to deliver viewer-tailored information during sports broadcasts to create richer viewing experiences.",
+    "Master's degree in Engineering from the University of Electro-Communications. " +
+    "My research focused on delivering personalized information to viewers during sports broadcasts to enrich the viewing experience.",
 };
