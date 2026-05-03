@@ -23,8 +23,8 @@ const Profile: React.FC = () => {
       <BasicInfo />
       <LineComponent />
       <SkillSet />
-      <LineComponent />
-      <Hobby />
+      {/* <LineComponent />
+      <Hobby /> */}
       <LineComponent />
       <Certification />
     </Box>

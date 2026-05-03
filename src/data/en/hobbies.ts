@@ -11,7 +11,7 @@ export const hobbies: Hobby[] = [
     title: "Baseball",
     description: [
       "Started playing baseball in 1st grade of elementary school.",
-      "Played on baseball teams through high school, then joined a recreational softball circle at university.",
+      "Played on baseball teams through university.",
     ],
     scale: 0.7,
   },
