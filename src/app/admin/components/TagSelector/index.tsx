@@ -13,6 +13,7 @@ import {
   Stack,
   Typography,
 } from '@mui/material'
+import { createSlug } from '@/lib/slug'
 
 export type Tag = {
   id: string
@@ -77,14 +78,6 @@ type TagSelectorProps = {
 const isValidTagName = (name: string) => {
   return /^[a-zA-Z0-9\s-]+$/.test(name.trim())
 }
-
-const createSlug = (name: string) =>
-  name
-    .trim()
-    .toLowerCase()
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '')
 
 export default function TagSelector({
   tags,

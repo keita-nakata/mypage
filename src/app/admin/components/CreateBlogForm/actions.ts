@@ -1,19 +1,12 @@
 'use server'
 
 import { createAdminClient } from '@/lib/supabase/admin'
+import { createSlug } from '@/lib/slug'
 import type { Tag } from '@/app/admin/components/TagSelector'
 
 const isValidTagName = (name: string) => {
   return /^[a-zA-Z0-9\s-]+$/.test(name.trim())
 }
-
-const createSlug = (name: string) =>
-  name
-    .trim()
-    .toLowerCase()
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '')
 
 type CreateBlogPostInput = {
   title: string
@@ -48,7 +41,7 @@ export async function createBlogPost(input: CreateBlogPostInput): Promise<{ id: 
 
   if (postError) {
     if (postError.code === '23505') {
-      throw new Error('A blog post with this title already exists')
+      throw new Error('A blog post with this slug already exists. Try a different title.')
     }
     throw new Error(postError.message)
   }

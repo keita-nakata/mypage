@@ -1,4 +1,6 @@
-import Link from 'next/link'
+'use client'
+
+import { useRouter } from 'next/navigation'
 import { Box, Typography } from '@mui/material'
 import BlogTag from './BlogTag'
 import type { BlogPost } from '@/types/blog'
@@ -8,6 +10,8 @@ interface BlogCardProps {
 }
 
 export default function BlogCard({ post }: BlogCardProps) {
+  const router = useRouter()
+
   const formattedDate = post.published_at
     ? new Date(post.published_at).toLocaleDateString('en-US', {
         year: 'numeric',
@@ -17,53 +21,55 @@ export default function BlogCard({ post }: BlogCardProps) {
     : null
 
   return (
-    <Link href={`/blog/${post.slug}`} style={{ textDecoration: 'none' }}>
-      <Box
+    <Box
+      onClick={() => router.push(`/blog/${post.slug}`)}
+      sx={{
+        padding: 3,
+        borderRadius: 2,
+        border: '1px solid #e0e0e0',
+        backgroundColor: 'white',
+        cursor: 'pointer',
+        transition: '0.2s',
+        '&:hover': {
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+          transform: 'translateY(-2px)',
+        },
+      }}
+    >
+      <Typography
+        variant="h6"
         sx={{
-          padding: 3,
-          borderRadius: 2,
-          border: '1px solid #e0e0e0',
-          backgroundColor: 'white',
-          transition: '0.2s',
-          '&:hover': {
-            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-            transform: 'translateY(-2px)',
-          },
+          fontFamily: 'Fredoka',
+          fontWeight: 600,
+          marginBottom: 0.5,
+          color: 'text.primary',
         }}
       >
-        <Typography
-          variant="h6"
-          sx={{
-            fontFamily: 'Fredoka',
-            fontWeight: 600,
-            marginBottom: 0.5,
-            color: 'text.primary',
-          }}
-        >
-          {post.title}
-        </Typography>
-        <Box sx={{ display: 'flex', gap: 2, marginBottom: 1 }}>
+        {post.title}
+      </Typography>
+      <Box sx={{ display: 'flex', gap: 2, marginBottom: 1 }}>
+        {formattedDate && (
           <Typography
             variant="caption"
             sx={{ color: 'text.secondary', display: 'block' }}
           >
             {formattedDate}
           </Typography>
-          <Typography
-            variant="caption"
-            sx={{ color: 'text.secondary', display: 'block' }}
-          >
-            {post.view_count} views
-          </Typography>
-        </Box>
-        {post.tags && post.tags.length > 0 && (
-          <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap' }}>
-            {post.tags.map((tag) => (
-              <BlogTag key={tag.slug} tag={tag} />
-            ))}
-          </Box>
         )}
+        <Typography
+          variant="caption"
+          sx={{ color: 'text.secondary', display: 'block' }}
+        >
+          {post.view_count} views
+        </Typography>
       </Box>
-    </Link>
+      {post.tags && post.tags.length > 0 && (
+        <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap' }}>
+          {post.tags.map((tag) => (
+            <BlogTag key={tag.slug} tag={tag} />
+          ))}
+        </Box>
+      )}
+    </Box>
   )
 }

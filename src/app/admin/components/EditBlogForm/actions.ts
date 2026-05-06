@@ -40,7 +40,12 @@ export async function updateBlogPost(
 
   if (postError) throw new Error(postError.message)
 
-  await supabase.from('blog_post_tags').delete().eq('blog_post_id', id)
+  const { error: deleteTagError } = await supabase
+    .from('blog_post_tags')
+    .delete()
+    .eq('blog_post_id', id)
+
+  if (deleteTagError) throw new Error(deleteTagError.message)
 
   if (tagIds.length > 0) {
     const { error: tagError } = await supabase
