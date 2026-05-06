@@ -42,16 +42,24 @@ export default function BlogCard({ post }: BlogCardProps) {
         >
           {post.title}
         </Typography>
-        <Typography
-          variant="caption"
-          sx={{ color: 'text.secondary', display: 'block', marginBottom: 1 }}
-        >
-          {formattedDate}
-        </Typography>
+        <Box sx={{ display: 'flex', gap: 2, marginBottom: 1 }}>
+          <Typography
+            variant="caption"
+            sx={{ color: 'text.secondary', display: 'block' }}
+          >
+            {formattedDate}
+          </Typography>
+          <Typography
+            variant="caption"
+            sx={{ color: 'text.secondary', display: 'block' }}
+          >
+            {post.view_count} views
+          </Typography>
+        </Box>
         {post.tags && post.tags.length > 0 && (
           <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap' }}>
             {post.tags.map((tag) => (
-              <BlogTag key={tag} tag={tag} />
+              <BlogTag key={tag.slug} tag={tag} />
             ))}
           </Box>
         )}

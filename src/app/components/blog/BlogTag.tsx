@@ -1,13 +1,14 @@
-import { Chip } from '@mui/material';
+import { BlogTag as BlogTagType } from '@/types/blog'
+import { Chip } from '@mui/material'
 
 interface BlogTagProps {
-  tag: string;
+  tag: BlogTagType
 }
 
 export default function BlogTag({ tag }: BlogTagProps) {
   return (
     <Chip
-      label={tag}
+      label={tag.name}
       size="small"
       sx={{
         fontFamily: 'Fredoka',
@@ -16,5 +17,5 @@ export default function BlogTag({ tag }: BlogTagProps) {
         color: 'text.primary',
       }}
     />
-  );
+  )
 }

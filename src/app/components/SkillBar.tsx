@@ -1,3 +1,5 @@
+'use client'
+
 import React from "react";
 import { Typography, Box } from "@mui/material";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';

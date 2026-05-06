@@ -2,7 +2,8 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { Box, Container, Divider, Typography } from '@mui/material'
 import BlogTag from '@/app/components/blog/BlogTag'
-import { getPublishedBlogPostBySlug } from '@/lib/blogs'
+import MarkdownRenderer from '@/app/components/blog/MarkdownRenderer'
+import { getPublishedBlogPostBySlug, incrementBlogView } from '@/lib/blogs'
 
 type BlogPostPageProps = {
   params: Promise<{
@@ -19,6 +20,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound()
   }
 
+  await incrementBlogView(slug)
+
   const formattedDate = post.published_at
     ? new Date(post.published_at).toLocaleDateString('en-US', {
         year: 'numeric',
@@ -29,7 +32,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <Box sx={{ backgroundColor: '#f0f0f0', minHeight: '100vh' }}>
-      <Container maxWidth="md" sx={{ py: 8 }}>
+      <Container
+        maxWidth="md"
+        sx={{
+          py: {
+            xs: 4,
+            md: 8,
+          },
+          px: {
+            xs: 2,
+            sm: 3,
+          },
+        }}
+      >
         <Link href="/blog" style={{ textDecoration: 'none' }}>
           <Typography
             variant="body2"
@@ -51,19 +66,39 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             fontFamily: 'Fredoka',
             fontWeight: 500,
             marginBottom: 1,
+            fontSize: {
+              xs: '2rem',
+              sm: '2.5rem',
+              md: '3rem',
+            },
+            lineHeight: 1.2,
+            wordBreak: 'break-word',
           }}
         >
           {post.title}
         </Typography>
 
-        {formattedDate && (
+        <Box
+          sx={{
+            display: 'flex',
+            gap: 2,
+          }}
+        >
+          {formattedDate && (
+            <Typography
+              variant="body2"
+              sx={{ color: 'text.secondary', marginBottom: 1.5 }}
+            >
+              Published on {formattedDate}
+            </Typography>
+          )}
           <Typography
             variant="body2"
             sx={{ color: 'text.secondary', marginBottom: 1.5 }}
           >
-            Published on {formattedDate}
+            {post.view_count} views
           </Typography>
-        )}
+        </Box>
 
         {post.tags && post.tags.length > 0 && (
           <Box
@@ -75,7 +110,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             }}
           >
             {post.tags.map((tag) => (
-              <BlogTag key={tag} tag={tag} />
+              <BlogTag key={tag.slug} tag={tag} />
             ))}
           </Box>
         )}
@@ -90,18 +125,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             padding: 4,
           }}
         >
-          <Typography
-            component="pre"
-            variant="body1"
-            sx={{
-              whiteSpace: 'pre-wrap',
-              lineHeight: 1.8,
-              fontFamily: 'inherit',
-              margin: 0,
-            }}
-          >
-            {post.content}
-          </Typography>
+          <MarkdownRenderer content={post.content} />
         </Box>
 
         <Box sx={{ marginTop: 5 }}>

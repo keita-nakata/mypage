@@ -1,45 +1,41 @@
 import { createClient } from '@/lib/supabase/server'
-import type { BlogPost } from '@/types/blog'
+import type { BlogPost, BlogTag } from '@/types/blog'
 
+// supabase returns the related data in a nested structure, so we need to flatten it
 type BlogPostRow = Omit<BlogPost, 'tags'> & {
   tags?: {
-    tag: {
-      name: string
-      slug: string
-    } | null
+    tag: BlogTag | null
   }[]
 }
 
-function normalizeBlogPost(row: BlogPostRow): BlogPost {
+function toBlogPost(row: BlogPostRow): BlogPost {
   return {
     ...row,
     tags:
-      row.tags?.flatMap((item) => {
-        if (!item.tag) {
-          return []
-        }
-
-        return [item.tag.name]
-      }) ?? [],
+      row.tags
+        ?.map((item) => item.tag)
+        .filter((tag): tag is BlogTag => tag !== null) ?? [],
   }
 }
+
+// get blog posts with their tags
+const blogPostSelect = `
+  *,
+  tags:blog_post_tags (
+    tag:tags (
+      id,
+      name,
+      slug
+    )
+  )
+`
 
 export async function getPublishedBlogPosts(): Promise<BlogPost[]> {
   const supabase = await createClient()
 
   const { data, error } = await supabase
     .from('blog_posts')
-    .select(
-      `
-      *,
-      tags:blog_post_tags (
-        tag:tags (
-          name,
-          slug
-        )
-      )
-    `,
-    )
+    .select(blogPostSelect)
     .eq('status', 'published')
     .order('published_at', { ascending: false })
 
@@ -48,7 +44,7 @@ export async function getPublishedBlogPosts(): Promise<BlogPost[]> {
     return []
   }
 
-  return data?.map((row) => normalizeBlogPost(row as BlogPostRow)) ?? []
+  return data?.map((row) => toBlogPost(row as BlogPostRow)) ?? []
 }
 
 export async function getPublishedBlogPostBySlug(
@@ -58,17 +54,7 @@ export async function getPublishedBlogPostBySlug(
 
   const { data, error } = await supabase
     .from('blog_posts')
-    .select(
-      `
-      *,
-      tags:blog_post_tags (
-        tag:tags (
-          name,
-          slug
-        )
-      )
-    `,
-    )
+    .select(blogPostSelect)
     .eq('slug', slug)
     .eq('status', 'published')
     .single()
@@ -78,5 +64,20 @@ export async function getPublishedBlogPostBySlug(
     return null
   }
 
-  return normalizeBlogPost(data as BlogPostRow)
+  return data ? toBlogPost(data as BlogPostRow) : null
+}
+
+export async function incrementBlogView(slug: string): Promise<boolean> {
+  const supabase = await createClient()
+
+  const { error } = await supabase.rpc('increment_blog_view', {
+    post_slug: slug,
+  })
+
+  if (error) {
+    console.error('Failed to increment blog view:', error)
+    return false
+  }
+
+  return true
 }

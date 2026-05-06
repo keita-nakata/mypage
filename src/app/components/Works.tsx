@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState } from 'react';
 import { Typography, Box } from '@mui/material';
 import WorkItem from './WorkItem';
