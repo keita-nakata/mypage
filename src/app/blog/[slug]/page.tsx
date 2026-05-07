@@ -119,9 +119,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
         <Box
           sx={{
-            backgroundColor: 'white',
-            borderRadius: 2,
-            border: '1px solid #e0e0e0',
             padding: 4,
           }}
         >

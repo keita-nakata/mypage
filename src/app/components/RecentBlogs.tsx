@@ -15,7 +15,10 @@ export default function RecentBlogs({ posts }: { posts: BlogPost[] }) {
         px: { xs: 2, md: 4 },
       }}
     >
-      <Typography variant="h4" sx={{ letterSpacing: '0.1em', textAlign: 'center' }}>
+      <Typography
+        variant="h4"
+        sx={{ letterSpacing: '0.1em', textAlign: 'center' }}
+      >
         BLOG
       </Typography>
 
@@ -32,14 +35,28 @@ export default function RecentBlogs({ posts }: { posts: BlogPost[] }) {
         {posts.length > 0 ? (
           posts.map((post) => <BlogCard key={post.slug} post={post} />)
         ) : (
-          <Typography color="text.secondary" sx={{ textAlign: 'center', mt: 2 }}>
+          <Typography
+            color="text.secondary"
+            sx={{ textAlign: 'center', mt: 2 }}
+          >
             No posts yet.
           </Typography>
         )}
       </Box>
 
       <NextLink href="/blog" style={{ textDecoration: 'none', marginTop: 32 }}>
-        <Button variant="contained" size="large" color="primary">
+        <Button
+          variant="text"
+          size="large"
+          sx={{
+            color: '#000000',
+            transition: 'color 0.5s ease',
+            '&:hover': {
+              color: '#1976d2',
+              backgroundColor: 'transparent',
+            },
+          }}
+        >
           View all posts →
         </Button>
       </NextLink>
