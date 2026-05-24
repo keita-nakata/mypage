@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import {
   Alert,
   Box,
@@ -90,6 +91,12 @@ export default function AdminLoginPage() {
             </Button>
           </Stack>
         </form>
+
+        <Box sx={{ mt: 2, textAlign: 'center' }}>
+          <Link href="/admin/reset-password" style={{ fontSize: '0.875rem', color: 'inherit' }}>
+            パスワードを忘れた方はこちら
+          </Link>
+        </Box>
       </Paper>
     </Box>
   )

@@ -30,15 +30,18 @@ export async function middleware(request: NextRequest) {
   } = await supabase.auth.getUser()
 
   const pathname = request.nextUrl.pathname
-  const isLoginPage = pathname === '/admin/login'
+  const isPublicAdminPage =
+    pathname === '/admin/login' ||
+    pathname === '/admin/reset-password' ||
+    pathname === '/admin/update-password'
 
-  if (!user && !isLoginPage) {
+  if (!user && !isPublicAdminPage) {
     const url = request.nextUrl.clone()
     url.pathname = '/admin/login'
     return NextResponse.redirect(url)
   }
 
-  if (user && isLoginPage) {
+  if (user && pathname === '/admin/login') {
     const url = request.nextUrl.clone()
     url.pathname = '/admin/blog'
     return NextResponse.redirect(url)

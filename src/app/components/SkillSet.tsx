@@ -10,16 +10,21 @@ const SkillSet: React.FC = () => {
       my: { xs: 3, md: '50px' },
     }}>
       <Typography variant="h4" sx={{ mb: '30px' }}>SKILL SET</Typography>
-      <div>
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' },
+          gap: { xs: 4, md: 5 },
+        }}
+      >
         {skillCategories.map((category) => (
           <SkillBar
             key={category.title}
-            data={category.data}
             title={category.title}
-            backgroundColor={category.backgroundColor}
+            skills={category.skills}
           />
         ))}
-      </div>
+      </Box>
     </Box>
   );
 };

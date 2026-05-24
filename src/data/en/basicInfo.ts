@@ -1,8 +1,8 @@
 export const basicInfo = {
-  name: "Keita Nakata",
-  origin: "From Mie, Japan",
-  belonging: "Frontend Engineer at Rakuten Group, Inc. (since April 2026)",
+  name: 'Keita Nakata',
+  origin: 'Tokyo, Japan',
+  belonging: 'Frontend Engineer at Rakuten Group, Inc.',
   research:
     "Master's degree in Engineering from the University of Electro-Communications. " +
-    "My research focused on delivering personalized information to viewers during sports broadcasts to enrich the viewing experience.",
-};
+    'My research focused on delivering personalized information to viewers during sports broadcasts to enrich the viewing experience.',
+}

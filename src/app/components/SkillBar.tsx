@@ -1,39 +1,48 @@
 'use client'
 
-import React from "react";
-import { Typography, Box } from "@mui/material";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
-import { proficiencyLabels } from '@/data/en/skills';
+import React from 'react';
+import { Typography, Box, Chip } from '@mui/material';
 
-interface BarChartProps {
-  data: Array<{ name: string; value: number }>;
+interface SkillCategoryProps {
   title: string;
-  backgroundColor?: string;
+  skills: string[];
 }
 
-const SkillBar: React.FC<BarChartProps> = ({ data, title, backgroundColor = 'rgba(255, 255, 0, 0.4)' }) => {
-  const fixedBarHeight = 30;
-  const totalHeight = fixedBarHeight * data.length + 100;
-
+const SkillBar: React.FC<SkillCategoryProps> = ({ title, skills }) => {
   return (
-    <Box sx={{
-      margin: '20px',
-      backgroundColor: backgroundColor,
-      borderRadius: '30px',
-    }}>
-      <Typography variant="h6" sx={{ marginLeft: '30px', paddingTop: '10px' }}>{title}</Typography>
-      <ResponsiveContainer width="90%" height={totalHeight}>
-        <BarChart data={data} layout="vertical">
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis
-            type="number"
-            ticks={[0, 1, 2, 3]}
-            tickFormatter={(value) => proficiencyLabels[value]}
+    <Box>
+      <Typography
+        sx={{
+          mb: 2,
+          fontSize: '0.85rem',
+          fontWeight: 700,
+          letterSpacing: '0.15em',
+          textTransform: 'uppercase',
+          color: 'text.primary',
+          borderLeft: '3px solid #00ffff',
+          pl: 1.5,
+        }}
+      >
+        {title}
+      </Typography>
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5 }}>
+        {skills.map((skill) => (
+          <Chip
+            key={skill}
+            label={skill}
+            size="medium"
+            sx={{
+              borderRadius: '8px',
+              fontWeight: 600,
+              fontSize: '0.875rem',
+              backgroundColor: '#1a1a2e',
+              color: '#ffffff',
+              border: '1px solid #00ffff',
+              '&:hover': { backgroundColor: '#00ffff', color: '#000000' },
+            }}
           />
-          <YAxis dataKey="name" type="category" width={120} interval={0} />
-          <Bar dataKey="value" fill="#8884d8" maxBarSize={fixedBarHeight} />
-        </BarChart>
-      </ResponsiveContainer>
+        ))}
+      </Box>
     </Box>
   );
 };
