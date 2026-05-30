@@ -12,7 +12,6 @@ const Profile: React.FC = () => {
         mt: { xs: 2, md: '30px' },
         mb: { xs: 3, md: '50px' },
         pb: { xs: 6, md: '100px' },
-        minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
         backgroundColor: '#ffffff',
@@ -32,7 +31,7 @@ const Profile: React.FC = () => {
       <LineComponent />
       <SkillSet />
       <LineComponent />
-      <Certification />
+      {/* <Certification /> */}
     </Box>
   )
 }
